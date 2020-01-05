@@ -144,7 +144,7 @@ contract EventTickets {
             - transfer the contract balance to the owner
             - emit the appropriate event
     */
-    function endSale() onlyOwner private {
+    function endSale() private onlyOwner {
         myEvent.isOpen = false;
        uint totalBalance = address(this).balance;
         msg.sender.transfer(totalBalance);
