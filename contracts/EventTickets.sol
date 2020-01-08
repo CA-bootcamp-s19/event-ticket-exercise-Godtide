@@ -126,14 +126,13 @@ contract EventTickets {
             - Emit the appropriate event.
     */
         function getRefund() public {
-        uint tickets = myEvent.buyers[msg.sender];
-        require(tickets != 0);
+        require( myEvent.buyers[msg.sender] != 0);
         require(myEvent.isOpen==true);
-        myEvent.sales -= tickets;
-        myEvent.totalTickets += tickets;
-        uint Refund = ( tickets * TICKET_PRICE);
+        myEvent.sales -= myEvent.buyers[msg.sender];
+        myEvent.totalTickets += myEvent.buyers[msg.sender];
+        uint Refund = ( myEvent.buyers[msg.sender] * TICKET_PRICE);
         msg.sender.transfer(Refund);
-        emit LogGetRefund(msg.sender, tickets);
+        emit LogGetRefund(msg.sender, myEvent.buyers[msg.sender]);
         }
     /*
         Define a function called endSale().
